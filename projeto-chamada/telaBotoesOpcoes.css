@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 5px;
+  font-family: "Inter", sans-serif;
+  background: #F5F0F0;
+  display: flex;
+  justify-content: flex-start; /* Alteração aqui para mover para a esquerda */
+  align-items: center;
+  height: 100vh;
+}
+
+
+main {
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.container-opcoes {
+
+  width: 25%;
+  height: 500px;
+  display: flex;
+  background: #FFFDFD;
+  box-shadow: 5px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 17px;
+  overflow: hidden;
+  margin-top: 10%;
+  align-content: center;
+  justify-content: center;
+  margin: auto;
+}
+
+#div_leitor_facial {
+  width: 353px;
+  background: #B61717;
+  display: flex;
+  align-items: center;
+  
+}
+
+.grupo-botoes {
+
+  margin-left: 15px; /* Ajuste o valor conforme necessário para posicionar à esquerda */
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  right:50%;  /* Adiciona uma coluna para empilhar verticalmente os botões */
+}
+a:link {text-decoration: none;
+
+}
+
+a:hover {text-decoration: bold;}
+
+#login:hover,
+#logout:hover,
+#cadastro:hover {
+
+  background-color: #B61717;
+  transition: 0.8s;
+  transform: scale(1.1, 1.1);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 800;
+  font-size: 25px;
+  Line-height: 90px;
+  text-Align: Center;
+  color:black;
+  margin: 0;
+
+}
+
+button {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  display: block;
+  width: 400px;
+  height: 70px;
+  margin-top: 30px;
+  background: #D9D9D9;
+  cursor: pointer;
+  border-radius: 17px;
+  
+}
+
+    .container-login {
+      position: relative;
+    }
+
+    #ponto_entrada,
+    #ponto_saida {
+      padding: 5px;
+      height: 90%;
+      width: 40%;
+      margin: auto;
+      margin-right: 15px;
+      background-color: #c55555;
+      /* Adicione outras propriedades de estilo conforme necessário */
+    }
+
+.preview {
+   display: flex;
+   width:100%;
+}
+
+.container-ponto {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+#div-camera {
+  width: 20%;
+  flex: 1;
+  margin-top: 13%;
+}
+
+
+
+  
+
+
+
+
+
