@@ -25,24 +25,29 @@ const closePreview = () => {
 }
 
 // Cria elemento de video e do canva para câmera
-const getPreviewElement = (videoListener) => {
+const getPreviewElement = (videoListener, videoWidth, videoHeight) => {
   const video = document.createElement('video');
   const canvas = document.createElement('canvas');
 
-  video.setAttribute('autoplay', true)
-  video.addEventListener("play", () => videoListener(video, canvas))
+  // Definindo as propriedades de largura e altura do vídeo
+  video.width = videoWidth ||380; // Defina a largura desejada (300 pixels neste exemplo)
+  video.height = videoHeight || 380; // Defina a altura desejada (200 pixels neste exemplo)
 
-  const containerPreview = document.createElement('div')
+  video.setAttribute('autoplay', true);
+  video.addEventListener("play", () => videoListener(video, canvas));
 
-  containerPreview.className = `preview`
-  containerPreview.append(video)
-  containerPreview.append(canvas)
+  const containerPreview = document.createElement('div');
+  containerPreview.className = 'preview';
+  containerPreview.append(video);
+  containerPreview.append(canvas);
+
   return {
     video,
     containerPreview,
     canvas
-  }
-}
+  };
+};
+
 
 // Verifica o usuário pela face
 async function verifyUserByFace(e) {
