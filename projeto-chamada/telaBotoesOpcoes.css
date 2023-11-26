@@ -7,7 +7,7 @@
 body {
   padding: 5px;
   font-family: "Inter", sans-serif;
-  background: #F5F0F0;
+  background:#FFFDFD ;
   display: flex;
   justify-content: flex-start; /* Alteração aqui para mover para a esquerda */
   align-items: center;
@@ -24,17 +24,16 @@ main {
 
 .container-opcoes {
 
-  width: 25%;
-  height: 500px;
+  width: 20%;
+  height: 350px;
   display: flex;
   background: #FFFDFD;
   box-shadow: 5px 4px 15px 0px rgba(0, 0, 0, 0.25);
   border-radius: 17px;
   overflow: hidden;
-  margin-top: 10%;
   align-content: center;
   justify-content: center;
-  margin: auto;
+  margin-top: 0%;
 }
 
 #div_leitor_facial {
@@ -48,7 +47,7 @@ main {
 .grupo-botoes {
 
   margin-left: 15px; /* Ajuste o valor conforme necessário para posicionar à esquerda */
-  margin-top: 80px;
+  margin-top: center;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -84,7 +83,7 @@ button {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   display: block;
-  width: 400px;
+  width: 250px;
   height: 70px;
   margin-top: 30px;
   background: #D9D9D9;
@@ -101,34 +100,36 @@ button {
     #ponto_saida {
       padding: 5px;
       height: 90%;
-      width: 40%;
+      width: 35%;
       margin: auto;
       margin-right: 15px;
-      background-color: #c55555;
+      background-color:rgb(255, 205, 196);
+      border: 5px solid black; /* Adicione a borda aqui */
       /* Adicione outras propriedades de estilo conforme necessário */
     }
-
+    
 .preview {
    display: flex;
    width:100%;
 }
 
 .container-ponto {
-  width: 50%;
+  width: 55%;
   display: flex;
   flex-direction: row;
+    /* Remova margin-right para evitar conflitos */
+}
+#div-camera {
+  position: fixed;
+  bottom:0;  
+  top: 35%;
 }
 
-#div-camera {
-  width: 20%;
-  flex: 1;
-  margin-top: 13%;
-}
+
 
 
 
   
-
 
 
 
