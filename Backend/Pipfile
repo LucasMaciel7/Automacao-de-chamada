@@ -12,6 +12,19 @@ djangorestframework = "*"
 drf-yasg = "*"
 psycopg2-binary = "*"
 
+
+[scripts]
+superuser = "python manage.py createsuperuser --no-input"
+migrate = "python manage.py migrate"
+makemigrations = "python manage.py makemigrations"
+dev = "python manage.py runserver"
+start = "python manage.py runserver 0.0.0.0:8000"
+manage  = "python manage.py"
+tests = "pipenv run pytest -v"
+gendocs = "python manage.py collectstatic"
+showmigration = "python manage.py showmigrations"
+
+
 [dev-packages]
 
 [requires]
