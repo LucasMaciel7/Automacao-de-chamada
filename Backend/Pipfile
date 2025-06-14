@@ -11,7 +11,7 @@ django-extensions = "*"
 djangorestframework = "*"
 drf-yasg = "*"
 psycopg2-binary = "*"
-
+face-recognition = "*"
 
 [scripts]
 superuser = "python manage.py createsuperuser --no-input"
@@ -24,8 +24,7 @@ tests = "pipenv run pytest -v"
 gendocs = "python manage.py collectstatic"
 showmigration = "python manage.py showmigrations"
 
-
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.10"
