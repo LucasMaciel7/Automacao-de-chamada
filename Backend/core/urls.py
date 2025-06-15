@@ -5,5 +5,5 @@ from core.Controller.presenca import PresencaManagerRoute
 
 urlpatterns = [
     path('alunos/', AlunoManagerRoute.as_view(), name='criar-aluno'),
-    path('registra_ponto/', PresencaManagerRoute.as_view(), name='registrar-presenca'),
+    path('ponto/', PresencaManagerRoute.as_view(), name='registrar-presenca'),
 ]
