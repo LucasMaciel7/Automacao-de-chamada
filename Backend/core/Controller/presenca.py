@@ -4,14 +4,14 @@ from rest_framework import status
 from core.serializer import RegistroPresencaSerializer
 
 from core.service.aluno import AlunoService
-
+from core.service.presenca import PresencaService
 
 
 class PresencaManagerRoute(APIView):
     
     def __init__(self):
         self.service = AlunoService()
-    
+        self.presenca_service = PresencaService()
     
     def post(self, request):
         """
@@ -25,6 +25,7 @@ class PresencaManagerRoute(APIView):
         imagem_base64 = serializer.validated_data['imagem_base64']
         
         try:
+            # Compara o rosto do aluno com a imagem base64
             resultado = self.service.compara_alunos(aluno_ra, imagem_base64)
 
             if not resultado:
@@ -32,14 +33,29 @@ class PresencaManagerRoute(APIView):
                     {'erro': 'Rosto não corresponde ao aluno informado.'},
                     status=status.HTTP_401_UNAUTHORIZED
                 )
-
-            # Aqui entraria a lógica de salvar presença na tabela Presenca
-            return Response({'status': 'Ponto registrado com sucesso.'}, status=status.HTTP_200_OK)
+            
+            # Registra a presença do aluno
+            registra_presenca = self.presenca_service.registrar_presenca(
+                aluno_ra = aluno_ra   
+            )
+            
+            return Response({
+                "dados": registra_presenca
+            }, status=status.HTTP_200_OK)  
+    
 
         except ValueError as e:
             return Response({'erro': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
             return Response({'erro': f'Erro inesperado: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def get(self, request):
+        try:
+            
+            relatorio = self.presenca_service.get_relatorio_de_presenca()
+            return Response(relatorio, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"erro": f"Erro ao gerar relatório: {str(e)}"}, status=500)
 
         
