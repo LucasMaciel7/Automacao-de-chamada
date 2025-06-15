@@ -1,9 +1,7 @@
-import json
-import numpy as np
 import base64
+import face_recognition
 from io import BytesIO
 from core.repository.aluno import AlunoRepository
-import face_recognition
 
 class AlunoService:
     def __init__(self):
