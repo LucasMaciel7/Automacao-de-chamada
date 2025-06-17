@@ -57,5 +57,9 @@ class PresencaManagerRoute(APIView):
             return Response(relatorio, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"erro": f"Erro ao gerar relatório: {str(e)}"}, status=500)
+        
+    def get_relatorio_de_presenca(self):
+        presencas = self.presenca_service.presencas_do_dia()
+        return Response(presencas, status=status.HTTP_200_OK)
 
         

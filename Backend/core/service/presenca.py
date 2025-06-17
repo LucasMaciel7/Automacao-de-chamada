@@ -19,6 +19,18 @@ class PresencaService:
         self.aluno_service = AlunoService()
         
         
+    def presencas_do_dia(self):
+        presencas = self.presenca_repository.get_todas_presencas_do_dia()
+        relatorio = []
+        for presenca in presencas:
+            relatorio.append({
+                "nome": presenca.aluno.nome,
+                "ra": presenca.aluno.ra,
+                "entrada": presenca.hora_entrada.strftime("%H:%M") if presenca.hora_entrada else None,
+                "saida": presenca.hora_saida.strftime("%H:%M") if presenca.hora_saida else None,
+            })
+        return relatorio
+    
         
 
     def registrar_presenca(self, aluno_ra, reconhecido_por="tablet"):

@@ -41,4 +41,8 @@ class PresencaRepository:
         dia_semana_pt = DIAS_EM_PORTUGUES[dia_semana_ingles]
         return Aula.objects.filter(dia_semana__iexact=dia_semana_pt).order_by('horario_inicio')
     
+    @staticmethod
+    def get_todas_presencas_do_dia():
+        return Presenca.objects.filter(data=date.today())
+    
     
