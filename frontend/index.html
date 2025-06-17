@@ -1,43 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <title>Reconhecimento Facial/Menu</title>
-  <link rel="stylesheet" href="telaBotoesOpcoes.css">
-</head>
-<body>
-  <script type="module" src="/frontend/js/main.js"></script>
-  <script type="module" src="/frontend/libs/face-api.js"></script>
-
-  <main>
-    <div class="container-opcoes">
-      <div class="grupo-botoes">
-        <a href="cadastro.html" target="_blank">
-          <button id="cadastro">Cadastro</button>
-        </a>
-        <button id="login" type="button">Login</button>
-        
-        <button id="logout" type="button">Logout</button>
-    </div>
-    </div>
-    <div id="div-camera">
-
-    </div>
-    <div class="container-ponto">
-      <div id="ponto_entrada">
-        <h1>Login</h1>
-      </div>
-      <div id="ponto_saida">
-        <h1>Logout</h1>
-      </div>
-    </div>
-  </main>
-
-
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css">
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
