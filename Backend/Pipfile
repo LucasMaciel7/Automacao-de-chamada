@@ -12,6 +12,8 @@ djangorestframework = "*"
 drf-yasg = "*"
 psycopg2-binary = "*"
 face-recognition = "*"
+djangorestframework-simplejwt = "*"
+django-rest-swagger = "*"
 
 [scripts]
 superuser = "python manage.py createsuperuser --no-input"
