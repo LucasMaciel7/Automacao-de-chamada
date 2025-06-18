@@ -6,13 +6,30 @@ from core.serializer import RegistroPresencaSerializer
 from core.service.aluno import AlunoService
 from core.service.presenca import PresencaService
 
-
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 class PresencaManagerRoute(APIView):
     
     def __init__(self):
         self.service = AlunoService()
         self.presenca_service = PresencaService()
+        
     
+    @swagger_auto_schema(
+        operation_summary="Registrar ponto de presença do aluno",
+        operation_description="""
+        Registra o ponto do aluno com base no RA e na imagem em base64.  
+        O reconhecimento facial é feito no backend e, se aprovado, a entrada ou saída é registrada.
+        """,
+        request_body=RegistroPresencaSerializer,
+        responses={
+            200: openapi.Response(description="Ponto registrado com sucesso."),
+            400: "Requisição inválida (dados ausentes ou imagem mal formatada).",
+            401: "Rosto não corresponde ao aluno informado.",
+            500: "Erro interno ao processar a imagem ou salvar a presença.",
+        },
+        security=[{'Bearer': []}],
+    )
     def post(self, request):
         """
         Registra o ponto de presença do aluno.

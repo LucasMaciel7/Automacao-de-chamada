@@ -6,13 +6,29 @@ from core.serializer import AlunoCreateSerializer
 
 from core.utils.imagem import salvar_imagem_base64_em_arquivo
 from core.service.aluno import AlunoService
+from django.utils.decorators import method_decorator
+
+from drf_yasg.utils import swagger_auto_schema
 
 
 class AlunoManagerRoute(APIView):
     
     def __init__(self):
         self.service = AlunoService()
-
+  
+  
+  
+    @swagger_auto_schema(
+        operation_summary="Cadastrar novo aluno",
+        request_body=AlunoCreateSerializer,
+        responses={
+            201: "Aluno cadastrado com sucesso.",
+            400: "Dados inválidos.",
+            500: "Erro interno."
+        },
+        security=[{'Bearer': []}],  # <- ISSO USA O HEADER AUTOMATICAMENTE
+    )
+    
     def post(self, request):
         serializer = AlunoCreateSerializer(data=request.data)
 
