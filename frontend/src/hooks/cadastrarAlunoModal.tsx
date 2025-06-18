@@ -11,7 +11,7 @@ export default function CadastroAlunoModal({ isOpen, onClose }: Props) {
   const [ra, setRa] = useState("");
   const [email, setEmail] = useState("");
   const [fotoBase64, setFotoBase64] = useState<string | null>(null);
-
+  const token = localStorage.getItem("access_token")
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -56,7 +56,9 @@ export default function CadastroAlunoModal({ isOpen, onClose }: Props) {
     try {
       const response = await fetch("http://localhost:8000/alunos/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+           Authorization: ` Bearer ${token}` },
         body: JSON.stringify({ nome, email, ra, image_base64: fotoBase64 }),
       });
 
@@ -66,7 +68,9 @@ export default function CadastroAlunoModal({ isOpen, onClose }: Props) {
       fecharModal();
     } catch (error) {
       toast.error("Falha ao cadastrar aluno.");
+      fecharModal()
       console.error(error);
+      
     }
   };
 

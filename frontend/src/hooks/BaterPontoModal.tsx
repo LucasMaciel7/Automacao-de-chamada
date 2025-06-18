@@ -19,7 +19,7 @@ export default function BaterPontoModal({ isOpen, onClose, onPontoRegistrado }: 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [carregandoCamera, setCarregandoCamera] = useState(true);
-
+  const token = localStorage.getItem("access_token")
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -66,7 +66,10 @@ const pararCamera = () => {
     try {
       const response = await fetch("http://localhost:8000/ponto/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" ,
+          Authorization: ` Bearer ${token}`
+        },
         body: JSON.stringify({ ra, imagem_base64: fotoBase64 }),
      
       });

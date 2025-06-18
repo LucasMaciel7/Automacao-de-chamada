@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import GridPresencas from '../components/Gridpresenca';
 import CadastrarAlunoModal from '../hooks/cadastrarAlunoModal';
 import BaterPontoModal from '../hooks/BaterPontoModal';
+import { useNavigate } from "react-router-dom";
+import ResumoPresencasModal from '../components/ResumoPresenca';
 
 interface Presenca {
   nome: string;
@@ -12,13 +14,23 @@ interface Presenca {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("access_token");
+
   const [presencas, setPresencas] = useState<Presenca[]>([]);
   const [modalCadastroAberto, setModalCadastroAberto] = useState(false);
   const [modalPontoAberto, setModalPontoAberto] = useState(false);
+  const [modalResumoAberto, setModalResumoAberto] = useState(false);
 
   const buscarPresencas = async () => {
     try {
-      const resposta = await fetch("http://localhost:8000/presenca");
+      const resposta = await fetch("http://localhost:8000/presenca/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (!resposta.ok) throw new Error("Erro ao buscar presenças");
       const dados = await resposta.json();
       setPresencas(dados);
@@ -28,8 +40,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    buscarPresencas();
-  }, []);
+
+    if (!token) {
+      navigate("/"); // redireciona para login
+    } else {
+      buscarPresencas();
+    }
+  }, [navigate]);
 
   const adicionarPresenca = (nova: Presenca) => {
     setPresencas((prev) => {
@@ -59,6 +76,10 @@ export default function Home() {
           <button onClick={() => setModalPontoAberto(true)} className="bg-blue-600 text-white px-4 py-2 rounded">
             🕓 Bater Ponto
           </button>
+
+           <button onClick={() => setModalResumoAberto(true)} className="bg-purple-600 text-white px-4 py-2 rounded">
+              📋 Ver Resumo
+           </button>
         </div>
 
         <GridPresencas presencas={presencas} />
@@ -76,6 +97,13 @@ export default function Home() {
           }}
           onPontoRegistrado={adicionarPresenca}
         />
+        
+        <ResumoPresencasModal
+          isOpen={modalResumoAberto}
+          onClose={() => setModalResumoAberto(false)}
+        />
+
+        
       </div>
     </div>
   );

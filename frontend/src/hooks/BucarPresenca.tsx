@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import GridPresencas from "../components/Gridpresenca"; // ajuste o caminho conforme seu projeto
 
 interface Presenca {
   nome: string;
@@ -11,11 +10,19 @@ interface Presenca {
 export default function App() {
   const [presencas, setPresencas] = useState<Presenca[]>([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
     const buscarPresencas = async () => {
       try {
-        const resposta = await fetch("http://localhost:8000/presenca");
+        const resposta = await fetch("http://localhost:8000/presenca", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+             Authorization: `Bearer ${token}`, 
+          },
+        });
+
         if (!resposta.ok) {
           throw new Error("Erro ao buscar presenças");
         }
@@ -30,15 +37,20 @@ export default function App() {
     };
 
     buscarPresencas();
-  }, []);
+  }, [token]); // adiciona token como dependência se quiser garantir atualização
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Registros de Ponto</h1>
+    <div>
       {loading ? (
         <p>Carregando...</p>
       ) : (
-        <GridPresencas presencas={presencas} />
+        <ul>
+          {presencas.map((p, index) => (
+            <li key={index}>
+              {p.nome} - {p.ra} | Entrada: {p.entrada ?? "-"} | Saída: {p.saida ?? "-"}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
