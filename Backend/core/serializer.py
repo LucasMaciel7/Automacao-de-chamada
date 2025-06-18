@@ -17,3 +17,8 @@ class RegistroPresencaSerializer(serializers.Serializer, Base64ImageValidatorMix
 
     def validate_imagem_base64(self, value):  
         return super().validate_image_base64(value)
+    
+    
+class LoginSerializer(serializers.Serializer):
+        username = serializers.CharField()
+        password = serializers.CharField()
